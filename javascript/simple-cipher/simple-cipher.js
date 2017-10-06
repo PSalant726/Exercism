@@ -14,19 +14,13 @@ Cipher.prototype.validateKey = function(key) {
   return key;
 };
 
-Cipher.prototype.getShiftArr = function() {
-  return this.key.split('').map(letter => {
-    return ALPHABET.indexOf(letter);
-  });
-};
-
 Cipher.prototype.encode = function(message) {
   var letters = message.split('');
   var encodedMessage = "";
 
   letters.forEach((letter, idx) => {
-    var letterIdx  = ALPHABET.indexOf(letter);
-    var shiftIdx   = ALPHABET.indexOf(this.key[idx]);
+    var letterIdx = ALPHABET.indexOf(letter);
+    var shiftIdx = ALPHABET.indexOf(this.key[idx]);
     var encodedIdx = letterIdx + shiftIdx;
 
     if (encodedIdx >= ALPHABET.length) {
@@ -40,7 +34,22 @@ Cipher.prototype.encode = function(message) {
 };
 
 Cipher.prototype.decode = function(message) {
+  var letters = message.split('');
+  var decodedMessage = "";
 
+  letters.forEach((letter, idx) => {
+    var letterIdx = ALPHABET.indexOf(letter);
+    var shiftIdx = ALPHABET.indexOf(this.key[idx]);
+    var decodedIdx = letterIdx - shiftIdx;
+
+    if (decodedIdx < 0) {
+      decodedIdx += ALPHABET.length;
+    }
+
+    decodedMessage += ALPHABET[decodedIdx];
+  });
+
+  return decodedMessage;
 };
 
 module.exports = Cipher;
