@@ -1,8 +1,7 @@
 var ALPHABET = "abcdefghijklmnopqrstuvwxyz".split('');
 
 var Cipher = function(key) {
-  this.key = key ? this.validateKey(key) : "rhiannon";
-  this.shiftArr = undefined;
+  this.key = key ? this.validateKey(key) : "rhiannonteellococo";
 };
 
 Cipher.prototype.validateKey = function(key) {
@@ -22,9 +21,22 @@ Cipher.prototype.getShiftArr = function() {
 };
 
 Cipher.prototype.encode = function(message) {
-  this.getShiftArr(function(shiftArr) {
+  var letters = message.split('');
+  var encodedMessage = "";
 
+  letters.forEach((letter, idx) => {
+    var letterIdx  = ALPHABET.indexOf(letter);
+    var shiftIdx   = ALPHABET.indexOf(this.key[idx]);
+    var encodedIdx = letterIdx + shiftIdx;
+
+    if (encodedIdx >= ALPHABET.length) {
+      encodedIdx -= ALPHABET.length;
+    }
+
+    encodedMessage += ALPHABET[encodedIdx];
   });
+
+  return encodedMessage;
 };
 
 Cipher.prototype.decode = function(message) {
