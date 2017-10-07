@@ -1,68 +1,83 @@
-var ALPHABET = "abcdefghijklmnopqrstuvwxyz".split('');
+const LEGAL_VALUES = 'abcdefghijklmnopqrstuvwxyz';
+const START_CODE = 'a'.charCodeAt(0);
+const END_CODE = 'z'.charCodeAt(0);
 
 class Cipher {
   constructor(key) {
-    this.key = key ? this.validateKey(key) : this.generateKey();
-  };
+    if (key === undefined) {
+      this.generateKey();
 
-  validateKey(key) {
-    key.split('').forEach(char => {
-      if (ALPHABET.indexOf(char) === -1) {
-        throw new Error("Bad key");
-      }
-    });
-
-    return key;
-  };
-
-  generateKey() {
-    var key = "";
-
-    for (var i = 0; i < 100; i++) {
-      var randomIdx = Math.floor(Math.random() * ALPHABET.length);
-      key += ALPHABET[randomIdx];
+    } else {
+      this.key = key;
+      this.validateKey();
     }
-
-    return key;
   }
 
-  encode(message) {
-    var letters = message.split('');
-    var encodedMessage = "";
+  generateKey() {
+    this.key = '';
 
-    letters.forEach((letter, idx) => {
-      var letterIdx = ALPHABET.indexOf(letter);
-      var shiftIdx = ALPHABET.indexOf(this.key[idx]);
-      var encodedIdx = letterIdx + shiftIdx;
+    for (let i = 0; i < 100; i++) {
+      let randomIdx = Math.floor(Math.random() * 26);
+      this.key += LEGAL_VALUES.charAt(randomIdx);
+    }
+  }
 
-      if (encodedIdx >= ALPHABET.length) {
-        encodedIdx -= ALPHABET.length;
+  validateKey() {
+    const emptyKey = this.key.length < 1;
+    const hasInvalidChars = this.key.split('').some(letter => {
+      return LEGAL_VALUES.indexOf(letter) === -1;
+    });
+
+    if (emptyKey || hasInvalidChars) {
+      throw new Error('Bad key');
+    }
+  }
+
+  encode(decodedMessage) {
+    let longKey = this.key;
+    let encodedMessage = "";
+
+    while (longKey.length < decodedMessage.length) {
+      longKey += longKey;
+    }
+
+    decodedMessage.split('').forEach((letter, idx) => {
+      const currentKeyCode = longKey.charCodeAt(idx);
+      const offset = (currentKeyCode - START_CODE);
+      let newCharCode = letter.charCodeAt(0) + offset;
+
+      if (newCharCode > END_CODE) {
+        newCharCode -= LEGAL_VALUES.length;
       }
 
-      encodedMessage += ALPHABET[encodedIdx];
+      encodedMessage += String.fromCharCode(newCharCode);
     });
 
     return encodedMessage;
-  };
+  }
 
-  decode(message) {
-    var letters = message.split('');
-    var decodedMessage = "";
+  decode(encodedMessage) {
+    let longKey = this.key;
+    let decodedMessage = "";
 
-    letters.forEach((letter, idx) => {
-      var letterIdx = ALPHABET.indexOf(letter);
-      var shiftIdx = ALPHABET.indexOf(this.key[idx]);
-      var decodedIdx = letterIdx - shiftIdx;
+    while (longKey.length < encodedMessage.length) {
+      longKey += longKey;
+    }
 
-      if (decodedIdx < 0) {
-        decodedIdx += ALPHABET.length;
+    encodedMessage.split('').forEach((letter, idx) => {
+      const currentKeyCode = longKey.charCodeAt(idx);
+      const offset = (currentKeyCode - START_CODE);
+      let newCharCode = letter.charCodeAt(0) - offset;
+
+      if (newCharCode < START_CODE) {
+        newCharCode += LEGAL_VALUES.length;
       }
 
-      decodedMessage += ALPHABET[decodedIdx];
+      decodedMessage += String.fromCharCode(newCharCode);
     });
 
     return decodedMessage;
-  };
+  }
 }
 
 module.exports = Cipher;
