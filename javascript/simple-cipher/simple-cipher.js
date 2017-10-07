@@ -1,55 +1,68 @@
 var ALPHABET = "abcdefghijklmnopqrstuvwxyz".split('');
 
-var Cipher = function(key) {
-  this.key = key ? this.validateKey(key) : "rhiannonteellococo";
-};
+class Cipher {
+  constructor(key) {
+    this.key = key ? this.validateKey(key) : this.generateKey();
+  };
 
-Cipher.prototype.validateKey = function(key) {
-  key.split('').forEach(char => {
-    if (ALPHABET.indexOf(char) === -1) {
-      throw new Error("Bad key");
-    }
-  });
+  validateKey(key) {
+    key.split('').forEach(char => {
+      if (ALPHABET.indexOf(char) === -1) {
+        throw new Error("Bad key");
+      }
+    });
 
-  return key;
-};
+    return key;
+  };
 
-Cipher.prototype.encode = function(message) {
-  var letters = message.split('');
-  var encodedMessage = "";
+  generateKey() {
+    var key = "";
 
-  letters.forEach((letter, idx) => {
-    var letterIdx = ALPHABET.indexOf(letter);
-    var shiftIdx = ALPHABET.indexOf(this.key[idx]);
-    var encodedIdx = letterIdx + shiftIdx;
-
-    if (encodedIdx >= ALPHABET.length) {
-      encodedIdx -= ALPHABET.length;
+    for (var i = 0; i < 100; i++) {
+      var randomIdx = Math.floor(Math.random() * ALPHABET.length);
+      key += ALPHABET[randomIdx];
     }
 
-    encodedMessage += ALPHABET[encodedIdx];
-  });
+    return key;
+  }
 
-  return encodedMessage;
-};
+  encode(message) {
+    var letters = message.split('');
+    var encodedMessage = "";
 
-Cipher.prototype.decode = function(message) {
-  var letters = message.split('');
-  var decodedMessage = "";
+    letters.forEach((letter, idx) => {
+      var letterIdx = ALPHABET.indexOf(letter);
+      var shiftIdx = ALPHABET.indexOf(this.key[idx]);
+      var encodedIdx = letterIdx + shiftIdx;
 
-  letters.forEach((letter, idx) => {
-    var letterIdx = ALPHABET.indexOf(letter);
-    var shiftIdx = ALPHABET.indexOf(this.key[idx]);
-    var decodedIdx = letterIdx - shiftIdx;
+      if (encodedIdx >= ALPHABET.length) {
+        encodedIdx -= ALPHABET.length;
+      }
 
-    if (decodedIdx < 0) {
-      decodedIdx += ALPHABET.length;
-    }
+      encodedMessage += ALPHABET[encodedIdx];
+    });
 
-    decodedMessage += ALPHABET[decodedIdx];
-  });
+    return encodedMessage;
+  };
 
-  return decodedMessage;
-};
+  decode(message) {
+    var letters = message.split('');
+    var decodedMessage = "";
+
+    letters.forEach((letter, idx) => {
+      var letterIdx = ALPHABET.indexOf(letter);
+      var shiftIdx = ALPHABET.indexOf(this.key[idx]);
+      var decodedIdx = letterIdx - shiftIdx;
+
+      if (decodedIdx < 0) {
+        decodedIdx += ALPHABET.length;
+      }
+
+      decodedMessage += ALPHABET[decodedIdx];
+    });
+
+    return decodedMessage;
+  };
+}
 
 module.exports = Cipher;
