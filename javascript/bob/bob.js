@@ -1,18 +1,16 @@
 class Bob {
   hey(text) {
     text = text.replace(/\n|\r|\t| /g, "");
-    let hasLetters = text.match(/[A-z]/);
+    let hasLetters = text.match(/[A-Z]/);
     let isYell = text.toUpperCase() === text;
-    let isQuestion = text.slice(-1) === '?';
-    let isEmpty = text === "";
 
     if (hasLetters && isYell) {
       return "Whoa, chill out!";
 
-    } else if (isQuestion) {
+    } else if (text.endsWith('?')) {
       return "Sure.";
 
-    } else if (isEmpty) {
+    } else if (text === "") {
       return "Fine. Be that way!";
 
     } else {
