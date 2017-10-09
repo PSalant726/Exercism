@@ -1,69 +1,14 @@
 class Gigasecond {
   constructor(date) {
     this.startDate = date;
-    this.endDate = this.dateAdd(this.startDate, 'second', 1000000000);
   }
 
   date() {
-    return this.endDate;
-  }
-
-  /**
-   * @param date  Date to start with
-   * @param interval  One of: year, quarter, month, week, day, hour, minute, second
-   * @param units  Number of units of the given interval to add.
-   */
-  dateAdd(date, interval, units) {
-    var ret = new Date(date);
-    
-    switch (interval.toLowerCase()) {
-      case 'year':
-        ret.setFullYear(ret.getFullYear() + units);
-        this.checkRollover(ret, date);
-        break;
-
-      case 'quarter':
-        ret.setMonth(ret.getMonth() + 3 * units);
-        this.checkRollover(ret, date);
-        break;
-
-      case 'month':
-        ret.setMonth(ret.getMonth() + units);
-        this.checkRollover(ret, date);
-        break;
-
-      case 'week':
-        ret.setDate(ret.getDate() + 7 * units);
-        break;
-
-      case 'day':
-        ret.setDate(ret.getDate() + units);
-        break;
-
-      case 'hour':
-        ret.setTime(ret.getTime() + units * 3600000);
-        break;
-
-      case 'minute':
-        ret.setTime(ret.getTime() + units * 60000);
-        break;
-
-      case 'second':
-        ret.setTime(ret.getTime() + units * 1000);
-        break;
-
-      default:
-        ret = undefined;
-        break;
-    }
+    let ret = new Date(this.startDate);
+    let endDate = ret.getTime() + 1000000000000;
+    ret.setTime(endDate);
 
     return ret;
-  }
-
-  checkRollover(ret, date) {
-    if (ret.getDate() != date.getDate()) {
-      ret.setDate(0);
-    };
   }
 }
 
