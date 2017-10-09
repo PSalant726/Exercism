@@ -19,17 +19,17 @@ class Gigasecond {
     switch (interval.toLowerCase()) {
       case 'year':
         ret.setFullYear(ret.getFullYear() + units);
-        this.checkRollover();
+        this.checkRollover(ret, date);
         break;
 
       case 'quarter':
         ret.setMonth(ret.getMonth() + 3 * units);
-        this.checkRollover();
+        this.checkRollover(ret, date);
         break;
 
       case 'month':
         ret.setMonth(ret.getMonth() + units);
-        this.checkRollover();
+        this.checkRollover(ret, date);
         break;
 
       case 'week':
@@ -60,7 +60,7 @@ class Gigasecond {
     return ret;
   }
 
-  checkRollover() {
+  checkRollover(ret, date) {
     if (ret.getDate() != date.getDate()) {
       ret.setDate(0);
     };
