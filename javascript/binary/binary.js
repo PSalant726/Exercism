@@ -1,25 +1,18 @@
 class Binary {
   constructor(binString) {
-    this.binString = binString;
+    this.binString = (/^[01]+$/).test(binString) ? binString : '0';
   }
 
   toDecimal() {
-    let binArr = this.binString.split('');
-    let retNum = 0;
-
-    for (var i = 0; i < binArr.length; i++) {
-      var binNum = parseInt(binArr[binArr.length - 1 - i]);
-
-      if (isNaN(binNum)) {
-        retNum = 0;
-        return 0;
-
-      } else {
-        retNum += (binNum * (2 ** i));
-      }
-    }
-
-    return retNum;
+    return this.binString
+      .split('')
+      .reverse()
+      .map((el, idx) => {
+        return el * Math.pow(2, idx);
+      })
+      .reduce((a, b) => {
+        return a + b;
+      });
   }
 }
 
