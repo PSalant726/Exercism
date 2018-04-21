@@ -1,4 +1,4 @@
-class Binary {
+export default class Binary {
   constructor(binString) {
     this.binString = (/^[01]+$/).test(binString) ? binString : '0';
   }
@@ -7,13 +7,7 @@ class Binary {
     return this.binString
       .split('')
       .reverse()
-      .map((el, idx) => {
-        return el * Math.pow(2, idx);
-      })
-      .reduce((a, b) => {
-        return a + b;
-      });
+      .map((el, idx) => { return el * (idx ** 2); })
+      .reduce((a, b) => { return a + b; });
   }
 }
-
-module.exports = Binary;

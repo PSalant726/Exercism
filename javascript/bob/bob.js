@@ -1,22 +1,19 @@
-class Bob {
-  hey(text) {
-    text = text.replace(/\n|\r|\t| /g, "");
-    let hasLetters = text.match(/[A-Z]/);
-    let isYell = text.toUpperCase() === text;
+export default class Bob {
+  static hey(text) {
+    const cleanText = text.replace(/[\n\r\t\s]/g, '');
+    const hasLetters = cleanText.match(/[A-Z]/);
+    const isYell = cleanText.toUpperCase() === cleanText;
 
     if (hasLetters && isYell) {
-      return "Whoa, chill out!";
+      return 'Whoa, chill out!';
 
-    } else if (text.endsWith('?')) {
-      return "Sure.";
+    } else if (cleanText.endsWith('?')) {
+      return 'Sure.';
 
-    } else if (text === "") {
-      return "Fine. Be that way!";
-
-    } else {
-      return "Whatever.";
+    } else if (cleanText === '') {
+      return 'Fine. Be that way!';
     }
+
+    return 'Whatever.';
   }
 }
-
-module.exports = Bob;
