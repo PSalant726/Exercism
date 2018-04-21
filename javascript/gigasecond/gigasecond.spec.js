@@ -1,4 +1,4 @@
-import Gigasecond from './gigasecond';
+const Gigasecond = require('./gigasecond');
 
 describe('Gigasecond', function() {
   it('tells a gigasecond anniversary since midnight', function() {

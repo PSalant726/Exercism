@@ -1,4 +1,4 @@
-import Binary from './binary';
+const Binary = require('./binary');
 
 describe('binary', function() {
   it('0 is decimal 0', function() {

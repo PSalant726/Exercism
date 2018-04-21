@@ -1,4 +1,4 @@
-export default class Gigasecond {
+class Gigasecond {
   constructor(date) {
     this.startDate = date;
   }
@@ -11,3 +11,5 @@ export default class Gigasecond {
     return ret;
   }
 }
+
+module.exports = Gigasecond;

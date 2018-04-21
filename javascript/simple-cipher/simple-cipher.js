@@ -17,7 +17,7 @@ class Cipher {
     this.key = '';
 
     for (let i = 0; i < 100; i++) {
-      let randomIdx = Math.floor(Math.random() * 26);
+      const randomIdx = Math.floor(Math.random() * 26);
       this.key += LEGAL_VALUES.charAt(randomIdx);
     }
   }
@@ -35,7 +35,7 @@ class Cipher {
 
   encode(decodedMessage) {
     let longKey = this.key;
-    let encodedMessage = "";
+    let encodedMessage = '';
 
     while (longKey.length < decodedMessage.length) {
       longKey += longKey;
@@ -58,7 +58,7 @@ class Cipher {
 
   decode(encodedMessage) {
     let longKey = this.key;
-    let decodedMessage = "";
+    let decodedMessage = '';
 
     while (longKey.length < encodedMessage.length) {
       longKey += longKey;

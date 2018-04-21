@@ -1,26 +1,26 @@
-var DnaTranscriber = function() {};
-var rnaPairs = {
-  "A" : "U",
-  "C" : "G",
-  "G" : "C",
-  "T" : "A"
-};
+class DnaTranscriber {
+  constructor() {
+    this.rnaPairs = {
+      A : 'U', C : 'G', G : 'C', T : 'A'
+    };
+  }
 
-DnaTranscriber.prototype.toRna = function(dnaSequence) {
-  var rnaSequence = "";
+  toRna(dnaSequence) {
+    let rnaSequence = '';
 
-  dnaSequence.split("").forEach(nucleotide => {
-    var pair = rnaPairs[nucleotide];
+    dnaSequence.split('').forEach(nucleotide => {
+      const pair = this.rnaPairs[nucleotide];
 
-    if (pair) {
-      rnaSequence += pair;
+      if (pair) {
+        rnaSequence += pair;
 
-    } else {
-      throw new Error("Invalid input");
-    }
-  });
+      } else {
+        throw new Error('Invalid input');
+      }
+    });
 
-  return rnaSequence;
-};
+    return rnaSequence;
+  }
+}
 
 module.exports = DnaTranscriber;

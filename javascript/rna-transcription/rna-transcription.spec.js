@@ -1,5 +1,6 @@
-var DnaTranscriber = require('./rna-transcription');
-var dnaTranscriber = new DnaTranscriber();
+const DnaTranscriber = require('./rna-transcription');
+
+const dnaTranscriber = new DnaTranscriber();
 
 describe('toRna()', function() {
   it('transcribes cytosine to guanine', function() {
@@ -24,14 +25,10 @@ describe('toRna()', function() {
   });
 
   it('correctly handles completely invalid input', function() {
-    expect(function() { dnaTranscriber.toRna('XXX'); }).toThrow(
-      new Error('Invalid input')
-    );
+    expect(function() { dnaTranscriber.toRna('XXX'); }).toThrow(new Error('Invalid input'));
   });
 
   it('correctly handles partially invalid input', function() {
-    expect(function() { dnaTranscriber.toRna('ACGTXXXCTTAA'); }).toThrow(
-      new Error('Invalid input')
-    );
+    expect(function() { dnaTranscriber.toRna('ACGTXXXCTTAA'); }).toThrow(new Error('Invalid input'));
   });
 });

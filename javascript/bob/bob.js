@@ -1,5 +1,5 @@
-export default class Bob {
-  static hey(text) {
+class Bob {
+  hey(text) {
     const cleanText = text.replace(/[\n\r\t\s]/g, '');
     const hasLetters = cleanText.match(/[A-Z]/);
     const isYell = cleanText.toUpperCase() === cleanText;
@@ -17,3 +17,5 @@ export default class Bob {
     return 'Whatever.';
   }
 }
+
+module.exports = Bob;

@@ -1,4 +1,4 @@
-import Bob from './bob';
+const Bob = require('./bob');
 
 describe('Bob', function() {
   const bob = new Bob();
