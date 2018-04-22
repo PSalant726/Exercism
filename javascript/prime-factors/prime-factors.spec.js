@@ -1,4 +1,5 @@
-const primeFactors = require('./prime-factors');
+const PrimeFactors = require('./prime-factors');
+const primeFactors = new PrimeFactors();
 
 describe('primeFactors', function() {
   it('returns an empty array for 1', function() {
