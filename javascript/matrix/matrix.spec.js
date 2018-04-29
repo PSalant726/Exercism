@@ -2,11 +2,13 @@ var Matrix = require('./matrix');
 
 describe('Matrix', function() {
   it('can extract a row', function() {
-    expect(new Matrix('1 2\n10 20').rows[0]).toEqual([1, 2]);
+    expect(new Matrix('1 2\n10 20').rows[0])
+      .toEqual([1, 2]);
   });
 
   it('can extract the other row', function() {
-    expect(new Matrix('9 8 7\n19 18 17').rows[1]).toEqual([19, 18, 17]);
+    expect(new Matrix('9 8 7\n19 18 17').rows[1])
+      .toEqual([19, 18, 17]);
   });
 
   it('can extract a column', function() {
