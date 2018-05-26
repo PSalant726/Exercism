@@ -1,4 +1,4 @@
-var Matrix = require('./matrix');
+const Matrix = require('./matrix');
 
 describe('Matrix', function() {
   it('can extract a row', function() {

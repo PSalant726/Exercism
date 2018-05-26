@@ -1,4 +1,4 @@
-var reverseString = require('./reverse-string');
+const reverseString = require('./reverse-string');
 
 describe('ReverseString', function() {
   it('empty string', function() {
