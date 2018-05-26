@@ -21,6 +21,7 @@ class Matrix {
       this.rows.forEach(row => {
         if (columns[i]) {
           columns[i].push(row[i]);
+
         } else {
           columns[i] = [row[i]] || [null];
         }

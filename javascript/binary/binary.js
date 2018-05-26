@@ -7,7 +7,7 @@ class Binary {
     return this.binString
       .split('')
       .reverse()
-      .map((el, idx) => { return el * (2 ** idx); })
+      .map((el, idx) => { return el * Math.pow(2, idx); })
       .reduce((a, b) => { return a + b; });
   }
 }

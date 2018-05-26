@@ -18,6 +18,7 @@ class Cipher {
 
     for (let i = 0; i < 100; i++) {
       const randomIdx = Math.floor(Math.random() * 26);
+
       this.key += LEGAL_VALUES.charAt(randomIdx);
     }
   }

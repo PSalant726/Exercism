@@ -22,6 +22,7 @@ describe('Random key cipher', function() {
 
   it('is reversible', function() {
     const plaintext = 'abcdefghij';
+
     expect(cipher.decode(cipher.encode(plaintext))).toEqual(plaintext);
   });
 });

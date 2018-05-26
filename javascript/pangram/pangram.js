@@ -8,13 +8,8 @@ class Pangram {
     this.text.forEach(letter => {
       const letterIdx = this.alphabet.indexOf(letter);
 
-      if (letterIdx >= 0) {
-        this.alphabet.splice(letterIdx, 1);
-      }
-
-      if (this.alphabet.length === 0) {
-        return true;
-      }
+      if (letterIdx >= 0) { this.alphabet.splice(letterIdx, 1); }
+      if (this.alphabet.length === 0) { return true; }
 
       return false;
     });

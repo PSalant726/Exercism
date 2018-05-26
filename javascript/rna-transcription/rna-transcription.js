@@ -1,8 +1,6 @@
 class DnaTranscriber {
   constructor() {
-    this.rnaPairs = {
-      A : 'U', C : 'G', G : 'C', T : 'A'
-    };
+    this.rnaPairs = { A: 'U', C: 'G', G: 'C', T: 'A' };
   }
 
   toRna(dnaSequence) {

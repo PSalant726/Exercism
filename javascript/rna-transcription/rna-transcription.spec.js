@@ -1,5 +1,4 @@
 const DnaTranscriber = require('./rna-transcription');
-
 const dnaTranscriber = new DnaTranscriber();
 
 describe('toRna()', function() {

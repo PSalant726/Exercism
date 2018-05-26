@@ -6,6 +6,7 @@ class Gigasecond {
   date() {
     const ret = new Date(this.startDate);
     const endDate = ret.getTime() + 1000000000000;
+
     ret.setTime(endDate);
 
     return ret;

@@ -1,4 +1,3 @@
-
 var TwoFer = require('./two-fer');
 
 describe('Two Fer', function() {
